@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  form(action="conv/",method="post")
+    input(type="text",name="url",placeholder="Enter GoogleMap route URL")
+    input(type="submit",value="CONVERT")
