@@ -1,15 +1,24 @@
 extends layout
 
 block content
-  form(action="xml/",method="post")
-    input(type="text",name="routename",placeholder="ROUTE NAME")
-    br
-    br
-    - var n = 0
-    each wp in waypoints
-      input(type="hidden",name="wp[#{n}][lat]",value=wp.lat)
-      input(type="hidden",name="wp[#{n}][lon]",value=wp.lon)
-      input(type="text",name="wp[#{n}][name]",placeholder=wp.label)
-      br
-      - n++
-    input(type="submit",value="Create Route")
+  row
+    column(cols="3" class="wplist")
+      form(action="xml/",method="post",id="pform")
+        input(type="text",name="routename",placeholder="ROUTE NAME")
+        br
+        br
+        - var n = 0
+        each wp in waypoints
+          input(type="text",name="wp[#{n}][name]",placeholder=wp.label)
+          br
+          input(type="text",name="wp[#{n}][lat]",value=wp.lat)
+          input(type="text",name="wp[#{n}][lon]",value=wp.lon)
+          br
+          input(type="button",onclick="updatepoint(#{n});",value="Update Point",class="btn",outline)
+          br
+          br
+          - n++
+        button(type="primary") CREATE ROUTE XML
+    column(cols="9")
+      div(id="canvas",class="full-full")
+    
